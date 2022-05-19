@@ -64,7 +64,9 @@ class Kernel extends HttpKernel
 
 
         // here is a list of middlewares of this project "university"
-        'add_new_student' => \App\Http\Middleware\University\Students\AddNewStudent::class,
+        'add_new_student' =>        \App\Http\Middleware\University\Students\AddNewStudent::class,
+        'get_student_by_email' =>   \App\Http\Middleware\University\Students\GetStudentByEmail::class,
+        'edit_student' =>           \App\Http\Middleware\University\Students\EditStudent::class,
 
 
 

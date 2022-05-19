@@ -25,16 +25,26 @@ Route::get('students', [
 
 // получить студента по email
 Route::get('students/email', [
-    'uses' => 'StudentsController@showStudentByEmail'
+    'uses' => 'StudentsController@showStudentByEmail',
+    'middleware' => [ 'get_student_by_email' ],
 ]);
 
 
 // получить студента по id
-Route::get('students/{id?}', [
+Route::get('students/{id}', [
     'uses' => 'StudentsController@showStudent'
 ]);
 
 
+// редактировать студента по id
+Route::put('students/{id}', [
+    'uses' => 'StudentsController@editStudent',
+    'middleware' => [ 'edit_student' ],
+]);
+
+Route::delete('students/{id}', [
+    'uses' => 'StudentsController@deleteStudent'
+]);
 
 
 // создать нового студента 

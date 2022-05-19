@@ -19,7 +19,7 @@ trait Rules
     
     public function getRulesForStudentEmail( $array_of_added_rules = [] ) : array {
 
-        $rules = [ 'email', 'unique:students' ];
+        $rules = [ 'email' ];
 
         return array_merge( $array_of_added_rules, $rules );
 

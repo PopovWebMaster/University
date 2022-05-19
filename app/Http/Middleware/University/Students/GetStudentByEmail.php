@@ -1,14 +1,13 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\Http\Middleware\University\Students;
 
 use Closure;
 use Validator;
 use App\Http\Middleware\University\Rules;
+use App\Rules\EmailExistingInStudentsTable;
 
-class AddNewStudent
+class GetStudentByEmail
 {
     use Rules;
     /**
@@ -20,12 +19,12 @@ class AddNewStudent
      */
     public function handle($request, Closure $next)
     {
-        
-        $array_to_check =   $request->all();
-        $rules =            $this->getArrayOfRules();
+
+        $array_to_check = $request->all();
+        $rules = $this->getArrayOfRules();
 
         $validator = Validator::make( $array_to_check, $rules );
-
+        
         if( $validator->fails() ){
 
             $arrResponseErrors = [
@@ -38,25 +37,16 @@ class AddNewStudent
         };
 
         return $next($request);
-
     }
 
     protected function getArrayOfRules() : array {
 
         $rules = [
-            'name' =>       $this->getRulesForStudentName(['required']) ,
-            'email' =>      $this->getRulesForStudentEmail( ['required', 'unique:students'] ),
-            'class_name' => $this->getRulesForClassName(['required']), 
+            'email' =>      $this->getRulesForStudentEmail( [ 'required', new EmailExistingInStudentsTable ] ),
         ];
 
         return (array) $rules;
     }
-
-
-
-
-
-
 
 
 
