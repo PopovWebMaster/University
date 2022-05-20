@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 use App\Models\StudentsModel;
 
-use Route;
-
 class StudentsController extends Controller
 {
 
